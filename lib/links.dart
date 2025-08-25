@@ -5,6 +5,7 @@ const inviteLink = "https://discord.gg/HXqF4aUZ3Y";
 const wikiLink = "https://mylegonetwork.fandom.com/wiki/Welcome_to_My_LEGO_Network_Wiki!";
 const githubLink = "https://github.com/MellonNet";
 final mlnLink = Uri.parse("https://mln.mellonnet.com");
+final setupLink = "https://www.reddit.com/r/FlashPlayerForever/comments/kp69ix/how_to_use_flash_player_after_january_12_2021/";
 
 class ExternalLink {
   final IconData icon;

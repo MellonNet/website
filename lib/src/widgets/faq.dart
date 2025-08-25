@@ -43,7 +43,7 @@ List faq(BuildContext context) => [
     "How do I play?",
     buildLink(context, [
       "My Lego Network is a Flash game, so you'll need to set up Flash and a compatible browser. See ",
-      ("this Reddit thread", "https://www.reddit.com/r/FlashPlayerForever/comments/kp69ix/how_to_use_flash_player_after_january_12_2021/"),
+      ("this Reddit thread", "/setup"),
       " for more details. Note that MellonNet has known problems with Ruffle, so we don't recommend using that at this time. ",
       "Once you have your Flash-compatible browser set up, head over to ",
       ("https://mln.mellonnet.com", "https://mln.mellonnet.com"),

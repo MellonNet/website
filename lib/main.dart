@@ -12,5 +12,9 @@ void main() => runApp(
   MaterialApp.router(
     routerConfig: router,
     debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      pageTransitionsTheme: PageTransitionsTheme(
+      ),
+    ),
   ),
 );

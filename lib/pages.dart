@@ -6,6 +6,14 @@ export "src/pages/home.dart";
 
 import "";
 
+GoRoute redirectRoute(String path, Uri url) => GoRoute(
+  path: path,
+  redirect: (context, state) {
+    launchUrl(url);
+    return "/";
+  },
+);
+
 final router = GoRouter(
   initialLocation: "/",
   routes: [
@@ -13,12 +21,8 @@ final router = GoRouter(
       path: "/",
       builder: (context, state) => HomePage(),
     ),
-    for (final link in ExternalLink.all) GoRoute(
-      path: link.path,
-      redirect: (context, state) {
-        launchUrl(link.url);
-        return "/";
-      },
-    ),
+    for (final link in ExternalLink.all)
+      redirectRoute(link.path, link.url),
+    redirectRoute("/setup", Uri.parse(setupLink))
   ],
 );
