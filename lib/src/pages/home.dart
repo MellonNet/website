@@ -36,15 +36,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(height: 12),
                 Text("Questions & Answers", style: context.textTheme.headlineLarge),
                 SizedBox(height: 12),
-                for (final (question, answer) in faq(context)) ...[
-                  Text(question, style: context.textTheme.headlineSmall),
-                  SizedBox(height: 8),
-                  if (answer is Widget)
-                    answer
-                  else
-                    SelectableText(answer, style: context.textTheme.bodyLarge),
-                  SizedBox(height: 24),
-                ],
+                ...topicList(context, faq(context)),
               ],
             ),
           ),

@@ -1,36 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:home_page/widgets.dart';
-import 'package:url_launcher/link.dart';
 
-typedef LinkTuple = (String, String);
-
-Widget buildLink(BuildContext context, List children) => RichText(
-  text: TextSpan(
-    children: [
-      for (final child in children)
-        if (child is String)
-          TextSpan(text: child, style: context.textTheme.bodyLarge)
-        else if (child is LinkTuple)
-          WidgetSpan(
-            alignment: PlaceholderAlignment.middle,
-            child: Link(
-              uri: Uri.parse(child.$2),
-              builder: (context, followLink) => InkWell(
-                onTap: followLink,
-                child: Text(
-                  child.$1,
-                  style: context.textTheme.bodyLarge
-                    ?.copyWith(color: Colors.blue, decoration: TextDecoration.underline),
-                ),
-              ),
-            ),
-          ),
-    ],
-  ),
-);
-
-List faq(BuildContext context) => [
+List<Topic> faq(BuildContext context) => [
   (
     "What is My Lego Network?",
     "My Lego Network was a social media / game hybrid released by the LEGO Group in 2008. Characters from iconic LEGO themes had their own pages, including LEGO Bionicle, LEGO Agents, LEGO City, and more. You could make your own page to show off your creations and interact with other users -- humans or NPC \"networkers\" -- to collect items and rank up. Each rank came with new friends, new items, and new modules to put on your page. Eventually, you'd get the items you needed to build a masterpiece and advance to the next rank.",
