@@ -19,7 +19,7 @@ List<Topic> faq(BuildContext context) => [
       " for more details. Note that MellonNet has known problems with Ruffle, so we don't recommend using that at this time. ",
       "Once you have your Flash-compatible browser set up, head over to ",
       ("https://mln.mellonnet.com", "https://mln.mellonnet.com"),
-      " or press the \"Play Now\" button at the top."
+      " or press the \"Play Now\" button at the top. We've also revived several of the minigames around MLN. Use the dropdown button to choose one!"
     ])
   ),
   (

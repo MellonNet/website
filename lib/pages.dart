@@ -11,8 +11,8 @@ import "";
 GoRoute redirectRoute(String path, Uri url) => GoRoute(
   path: path,
   redirect: (context, state) {
-    launchUrl(url);
-    return (state.extra as String?) ?? "/";
+    launchUrl(url, webOnlyWindowName: "_self");
+    return "/";
   },
 );
 
@@ -28,6 +28,6 @@ final router = GoRouter(
     normalPage("/mini-ranks", IntegrationsPage()),
     for (final link in ExternalLink.all)
       redirectRoute(link.path, link.url),
-    redirectRoute("/setup", Uri.parse(setupLink))
+    // redirectRoute("/setup", Uri.parse(setupLink))
   ],
 );

@@ -21,8 +21,30 @@ class ExternalLink {
   }) : url = Uri.parse(url);
 
   static final all = [
+    ExternalLink(icon: Icons.install_desktop, path: "/setup", name: "Install Flash", url: setupLink),
     ExternalLink(icon: SimpleIcons.fandom, path: "/wiki", name: "Wiki", url: wikiLink),
     ExternalLink(icon: SimpleIcons.discord, path: "/discord", name: "Discord", url: inviteLink),
     ExternalLink(icon: SimpleIcons.github, path: "/github", name: "GitHub", url: githubLink),
+  ];
+}
+
+class InternalLink {
+  final String name;
+  final Uri url;
+
+  const InternalLink({
+    required this.name,
+    required this.url,
+  });
+
+  static final minigames = [
+    InternalLink(name: "The Robot Chronicles", url: Uri.parse("https://robot-chronicles.mellonnet.com")),
+    InternalLink(name: "LEGO City Coast Guard", url: Uri.parse("https://coast-guard.mellonnet.com")),
+    InternalLink(name: "LEGO City Construction", url: Uri.parse("https://construction.mellonnet.com")),
+  ];
+
+  static final pages = [
+    InternalLink(name: "Home", url: Uri.parse("/")),
+    InternalLink(name: "Mini-Ranks", url: Uri.parse("/mini-ranks")),
   ];
 }

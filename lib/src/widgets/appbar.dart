@@ -1,67 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:home_page/links.dart';
-import 'package:home_page/pages.dart';
 import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
-import "utils.dart";
 
-List get minigames => [
-  ("The Robot Chronicles", "https://robot-chronicles.mellonnet.com"),
-  ("LEGO City Coast Guard", "https://coast-guard.mellonnet.com"),
-  ("LEGO City Construction", "https://construction.mellonnet.com"),
-];
+import 'package:home_page/links.dart';
+import "utils.dart";
 
 AppBar mlnAppBar({
   required BuildContext context,
   required String title,
 }) => AppBar(
-  backgroundColor: WidgetStateColor.fromMap({
-    WidgetState.scrolledUnder: Color.fromARGB(255, 203, 217, 228),
-    WidgetState.any: context.colorScheme.surface,
-  }),
   title: Text(title),
-  actions: [
-    TextButton(
-      child: Text("Home", style: context.textTheme.titleMedium),
-      onPressed: () => router.go("/"),
+  leading: Container(
+    margin: const EdgeInsets.all(8.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      image: DecorationImage(image: AssetImage("assets/echo.png")),
     ),
-    TextButton(
-      child: Text("Mini-Ranks", style: context.textTheme.titleMedium),
-      onPressed: () => router.go("/mini-ranks"),
+  ),
+  actions: [
+    for (final page in InternalLink.pages) Link(
+      uri: page.url,
+      builder: (context, followLink) => TextButton(
+        onPressed: followLink,
+        child: Text(page.name, style: context.textTheme.titleMedium),
+      ),
     ),
     for (final link in ExternalLink.all) Link(
       target: LinkTarget.blank,
-      uri: Uri.parse(link.path),
+      uri: link.url,
       builder: (context, followLink) => IconButton(
         icon: Icon(link.icon),
         onPressed: followLink,
         tooltip: link.name,
       ),
     ),
-    PopupMenuButton<String>(
-      tooltip: "Minigames",
-      icon: Icon(Icons.sports_esports),
-      onSelected: (item) => launchUrl(Uri.parse(item)),
-      itemBuilder: (context) => [
-        for (final minigame in minigames)
-          PopupMenuItem(
-            value: minigame.$2,
-            child: Text(minigame.$1),
+    const SizedBox(width: 4),
+    MenuAnchor(
+      builder: (context, controller, child) => OutlinedButton.icon(
+        label: Text("Minigames"),
+        iconAlignment: IconAlignment.end,
+        onPressed: () => controller.open(),
+        icon: Icon(Icons.arrow_drop_down),
+      ),
+      menuChildren: [
+        for (final minigame in InternalLink.minigames) Link(
+          target: LinkTarget.blank,
+          uri: minigame.url,
+          builder: (context, followLink) => ListTile(
+            title: Text(minigame.name, style: context.textTheme.bodyMedium),
+            onTap: followLink,
           ),
+        ),
       ],
     ),
+    SizedBox(width: 4),
     Link(
       uri: mlnLink,
       target: LinkTarget.blank,
       builder: (context, followLink) => ElevatedButton(
         onPressed: followLink,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xff3173A5),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.circular(8),
-          ),
-        ),
         child: Text("Play Now"),
       ),
     ),

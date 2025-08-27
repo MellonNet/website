@@ -9,7 +9,6 @@ class GalleryWidget extends StatefulWidget {
 
 class GalleryPageState extends State<GalleryWidget> {
   final controller = CarouselController();
-
   double get aspectRatio => 858 / 868;
 
   List<(String, String)> get images => [
@@ -59,7 +58,7 @@ class GalleryPageState extends State<GalleryWidget> {
           builder: (context, constraints) => ConstrainedBox(
             constraints: BoxConstraints(maxHeight: 500),
             child: SizedBox(
-              height: (constraints.maxWidth - 72)/14*10 * aspectRatio,
+              height: (constraints.maxWidth - 72)/9*5 * aspectRatio,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -69,16 +68,22 @@ class GalleryPageState extends State<GalleryWidget> {
                     iconSize: 36,
                   ),
                   Expanded(
-                    child: CarouselView.weighted(
-                      enableSplash: false,
-                      consumeMaxWeight: true,
-                      onTap: goTo,
-                      controller: controller,
-                      flexWeights: [1, 1, 10, 1, 1],
-                      children: [
-                        for (final (image, _) in images)
-                          Image.asset(image),
-                      ],
+                    child: ScrollConfiguration(
+                      behavior: MaterialScrollBehavior().copyWith(
+                        physics: NeverScrollableScrollPhysics(),
+                      ),
+                      child: CarouselView.weighted(
+                        enableSplash: false,
+                        itemSnapping: true,
+                        consumeMaxWeight: true,
+                        onTap: goTo,
+                        controller: controller,
+                        flexWeights: [1, 1, 5, 1, 1],
+                        children: [
+                          for (final (image, _) in images)
+                            Image.asset(image),
+                        ],
+                      ),
                     ),
                   ),
                   IconButton(

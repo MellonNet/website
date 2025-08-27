@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:home_page/links.dart';
 import 'package:home_page/widgets.dart';
 
 List<Topic> integrations(BuildContext context) => [
@@ -14,9 +13,9 @@ List<Topic> integrations(BuildContext context) => [
   (
     "Supported Minigames",
     buildLink(context, [
-      "Some mini-ranks were tied to progression in other Flash-based minigames. We've revived some of them: The Robot Chronicles, LEGO City Coast Guard, and LEGO City Construction. You'll need ",
-      ("a Flash-enabled browser", setupLink),
-      " to play. After finishing a mission, you'll be prompted to sign into MLN, and your reward will be sent to your inbox. Ruffle is not yet supported. To start playing, click on the minigames button in the top menu",
+      "Some mini-ranks were tied to progression in other Flash-based minigames. We've revived some of them as part of MellonNet. You'll need ",
+      ("a Flash-enabled browser", "/setup"),
+      " to play (Ruffle not yet supported). After finishing a mission, you'll be prompted to sign into MLN, and your reward will be sent to your inbox. To start playing, click on the minigames button in the top menu",
     ]),
   ),
   (
