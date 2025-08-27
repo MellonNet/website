@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:home_page/widgets.dart';
 import 'package:url_launcher/link.dart';
 
 import 'package:home_page/links.dart';
-import "utils.dart";
 
 Widget drawer(BuildContext context) => Drawer(
   child: Padding(
@@ -19,7 +19,7 @@ Widget drawer(BuildContext context) => Drawer(
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 16),
-              Image.asset("assets/promo.webp"),
+              HtmlImage("assets/promo.webp", size: Size(833, 345)),
               Divider(),
               for (final page in InternalLink.pages) Link(
                 uri: page.url,
@@ -75,8 +75,8 @@ AppBar mlnAppBar({
     margin: const EdgeInsets.all(8.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(12),
-      image: DecorationImage(image: AssetImage("assets/echo.png")),
     ),
+    child: HtmlImage("assets/echo.png", size: Size(202, 202)),
   ),
   actions: [
     if (!context.isMobile)

@@ -35,7 +35,7 @@ class _IntegrationsPageState extends State<IntegrationsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(child: Image.asset("assets/banner.webp")),
+                  Center(child: HtmlImage("assets/banner.webp", size: Size(922, 157))),
                   ...topicList(context, integrations(context)),
                 ],
               ),

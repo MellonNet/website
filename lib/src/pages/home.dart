@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
           AutoScrollDirection.none => null,
           _ => DirectionArrow(direction: direction),
         },
+        scrollTick: 5,
         child: ListView(
           controller: controller,
           cacheExtent: double.infinity,
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(child: Image.asset("assets/banner.webp")),
+                  Center(child: HtmlImage("assets/banner.webp", size: Size(922, 157))),
                   Center(
                     child: Text(
                       "Welcome to MellonNet!",

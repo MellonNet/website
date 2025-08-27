@@ -1,6 +1,5 @@
-import 'package:web/web.dart' as web;
-
 import 'package:flutter/material.dart';
+import "image.dart";
 
 class GalleryWidget extends StatefulWidget {
   const GalleryWidget({super.key});
@@ -15,6 +14,7 @@ class GalleryPageState extends State<GalleryWidget> {
 
   List<(String, String)> get images => [
     ("assets/rank1_page.png", "Public pages have modules other users can interact with. Here is a networker who can help guide you through Rank 1"),
+    ("assets/brickkeeper_page.png", "Characters from popular LEGO themes, like LEGO Universe, have their own pages and want to be your friend!"),
     ("assets/private_page.png", "Your private page is your personal hub!"),
     ("assets/mail_page.png", "Send mail to other players and networkers. Try sending some items to your friends, they'll appreciate it!"),
     ("assets/inventory_page.png", "Collect blueprints around the network to make new items and rank up!"),
@@ -69,12 +69,7 @@ class GalleryPageState extends State<GalleryWidget> {
               Flexible(
                 child: AspectRatio(
                   aspectRatio: aspectRatio,
-                  child: HtmlElementView.fromTagName(
-                    key: ValueKey(images[index].$1),
-                    tagName: "img",
-                    onElementCreated: (element) => (element as web.HTMLImageElement)
-                      .setAttribute("src", "/assets/${images[index].$1}"),
-                  ),
+                  child: HtmlImage(images[index].$1, size: Size(858, 868)),
                 ),
               ),
               IconButton(
