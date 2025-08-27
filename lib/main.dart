@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:home_page/constants.dart';
 import "package:home_page/pages.dart";
+import 'package:home_page/src/widgets/scroll_action.dart';
 
 /* TODO
 - The team
@@ -34,9 +35,17 @@ void main() {
             ),
           ),
         ),
+        scrollbarTheme: ScrollbarThemeData(
+          thumbVisibility: WidgetStatePropertyAll(true),
+          trackVisibility: WidgetStatePropertyAll(true),
+        )
       ),
       routerConfig: router,
       debugShowCheckedModeBanner: false,
+      actions: {
+        ...WidgetsApp.defaultActions,
+        ScrollIntent: FasterScrollAction(),
+      },
     ),
   );
 }

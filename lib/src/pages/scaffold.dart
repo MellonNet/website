@@ -16,7 +16,10 @@ class MlnScaffold extends StatefulWidget {
 }
 
 class _MlnScaffoldState extends State<MlnScaffold> {
-  final controller = ScrollController();
+  final controller = ScrollController(
+    onAttach: (position) {
+    }
+  );
 
   @override
   Widget build(BuildContext context) => Title(
@@ -26,15 +29,15 @@ class _MlnScaffoldState extends State<MlnScaffold> {
       drawer: context.isMobile ? drawer(context) : null,
       appBar: mlnAppBar(context: context, title: widget.title),
       body: AutoScroll(
-        controller: controller,
+        controller: PrimaryScrollController.of(context),
         anchorBuilder: (context) => SingleDirectionAnchor(),
         cursorBuilder: (direction) => switch (direction) {
           AutoScrollDirection.none => null,
           _ => DirectionArrow(direction: direction),
         },
-        scrollTick: 5,
         child: ListView(
-          controller: controller,
+          primary: true,
+          physics: AlwaysScrollableScrollPhysics(),
           cacheExtent: double.infinity,
           children: [
             Center(
