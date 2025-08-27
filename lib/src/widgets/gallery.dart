@@ -1,5 +1,6 @@
+import 'package:web/web.dart' as web;
+
 import 'package:flutter/material.dart';
-import 'package:home_page/src/widgets/utils.dart';
 
 class GalleryWidget extends StatefulWidget {
   const GalleryWidget({super.key});
@@ -27,7 +28,7 @@ class GalleryPageState extends State<GalleryWidget> {
 
   void update() {
     setState(() { });
-    controller.animateToItem(index, duration: duration, curve: curve);
+    // controller.animateToItem(index, duration: duration, curve: curve);
   }
 
   void prev() {
@@ -54,50 +55,34 @@ class GalleryPageState extends State<GalleryWidget> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        LayoutBuilder(
-          builder: (context, constraints) => ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: context.isMobile ? 750 : 500),
-            child: SizedBox(
-              height: (constraints.maxWidth - 72)/9*5 * aspectRatio,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: prev,
-                    icon: Icon(Icons.arrow_back),
-                    iconSize: 36,
-                  ),
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: MaterialScrollBehavior().copyWith(
-                        physics: NeverScrollableScrollPhysics(),
-                      ),
-                      child: CarouselView.weighted(
-                        shape: Border.all(
-                          width: 0,
-                          color: Colors.white,
-                        ),
-                        enableSplash: false,
-                        itemSnapping: true,
-                        consumeMaxWeight: true,
-                        onTap: goTo,
-                        controller: controller,
-                        flexWeights: [1, 1, 5, 1, 1],
-                        children: [
-                          for (final (image, _) in images)
-                            Image.asset(image),
-                        ],
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: next,
-                    icon: Icon(Icons.arrow_forward),
-                    iconSize: 36,
-                  ),
-                ],
+        LimitedBox(
+          maxHeight: 500,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                onPressed: prev,
+                icon: Icon(Icons.arrow_back),
+                iconSize: 36,
               ),
-            ),
+              Flexible(
+                child: AspectRatio(
+                  aspectRatio: aspectRatio,
+                  child: HtmlElementView.fromTagName(
+                    key: ValueKey(images[index].$1),
+                    tagName: "img",
+                    onElementCreated: (element) => (element as web.HTMLImageElement)
+                      .setAttribute("src", "/assets/${images[index].$1}"),
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: next,
+                icon: Icon(Icons.arrow_forward),
+                iconSize: 36,
+              ),
+            ],
           ),
         ),
         SizedBox(height: 8),
