@@ -21,7 +21,7 @@ void main() {
             foregroundColor: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 12),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(8),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
         ),
@@ -30,7 +30,7 @@ void main() {
             iconSize: 24,
             padding: EdgeInsets.symmetric(horizontal: 8),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(8),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
         ),

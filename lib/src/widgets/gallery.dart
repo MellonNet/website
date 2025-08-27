@@ -73,7 +73,7 @@ class GalleryPageState extends State<GalleryWidget> {
                         physics: NeverScrollableScrollPhysics(),
                       ),
                       child: CarouselView.weighted(
-                        shape: BoxBorder.all(
+                        shape: Border.all(
                           width: 0,
                           color: Colors.white,
                         ),

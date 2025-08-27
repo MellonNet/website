@@ -12,10 +12,9 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     color: Color(0xff3173A5),
-    // height: 125,
     width: double.infinity,
     child: Padding(
-      padding: EdgeInsetsGeometry.all(16),
+      padding: EdgeInsets.all(16),
       child: SelectableText(
         text,
         style: context.textTheme.labelLarge?.copyWith(color: Colors.white),
