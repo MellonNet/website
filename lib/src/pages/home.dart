@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
     title: "Welcome to MellonNet!",
     color: Colors.black,
     child: Scaffold(
+      drawer: context.isMobile ? drawer(context) : null,
       appBar: mlnAppBar(context: context, title: "MellonNet"),
       body: AutoScroll(
         controller: controller,
@@ -50,8 +51,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 12),
                   GalleryWidget(),
-                  SizedBox(height: 12),
-                  Text("Questions & Answers", style: context.textTheme.headlineLarge),
                   SizedBox(height: 12),
                   ...topicList(context, faq(context)),
                 ],

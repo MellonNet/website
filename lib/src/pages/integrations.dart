@@ -17,10 +17,15 @@ class _IntegrationsPageState extends State<IntegrationsPage> {
     title: "Mini-Ranks | MellonNet!",
     color: Colors.black,
     child: Scaffold(
+      drawer: context.isMobile ? drawer(context) : null,
       appBar: mlnAppBar(context: context, title: "Mini-Ranks"),
       body: AutoScroll(
         controller: controller,
         anchorBuilder: (context) => SingleDirectionAnchor(),
+        cursorBuilder: (direction) => switch (direction) {
+          AutoScrollDirection.none => null,
+          _ => DirectionArrow(direction: direction),
+        },
         child: ListView(
           controller: controller,
           cacheExtent: double.infinity,

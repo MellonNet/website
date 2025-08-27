@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_page/src/widgets/utils.dart';
 
 class GalleryWidget extends StatefulWidget {
   const GalleryWidget({super.key});
@@ -27,7 +28,6 @@ class GalleryPageState extends State<GalleryWidget> {
   void update() {
     setState(() { });
     controller.animateToItem(index, duration: duration, curve: curve);
-    // controller.animateToPage(index, duration: duration, curve: curve);
   }
 
   void prev() {
@@ -56,7 +56,7 @@ class GalleryPageState extends State<GalleryWidget> {
       children: [
         LayoutBuilder(
           builder: (context, constraints) => ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: 500),
+            constraints: BoxConstraints(maxHeight: context.isMobile ? 750 : 500),
             child: SizedBox(
               height: (constraints.maxWidth - 72)/9*5 * aspectRatio,
               child: Row(
@@ -73,6 +73,10 @@ class GalleryPageState extends State<GalleryWidget> {
                         physics: NeverScrollableScrollPhysics(),
                       ),
                       child: CarouselView.weighted(
+                        shape: BoxBorder.all(
+                          width: 0,
+                          color: Colors.white,
+                        ),
                         enableSplash: false,
                         itemSnapping: true,
                         consumeMaxWeight: true,
