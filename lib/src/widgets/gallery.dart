@@ -1,35 +1,42 @@
 import 'package:flutter/material.dart';
 import "image.dart";
 
+typedef GalleryImage = (String, String);  // asset, caption
+
+List<GalleryImage> get mlnImages => [
+  ("assets/rank1_page.png", "Public pages have modules other users can interact with. Here is a networker who can help guide you through Rank 1"),
+  ("assets/brickkeeper_page.png", "Characters from popular LEGO themes, like LEGO Universe, have their own pages and want to be your friend!"),
+  ("assets/private_page.png", "Your private page is your personal hub!"),
+  ("assets/mail_page.png", "Send mail to other players and networkers. Try sending some items to your friends, they'll appreciate it!"),
+  ("assets/inventory_page.png", "Collect blueprints around the network to make new items and rank up!"),
+  ("assets/page_builder.png", "Customize your page with all sorts of modules! Some yield items, others show off your creativity, and some do both!"),
+];
+
+List<GalleryImage> get minigameImages => [
+  ("assets/robot-chronicles.png", "In The Robot Chronicles, Dr. Inferno has invaded LEGO City with his giant robot! The LEGO City emergency teams, LEGO Agents, and LEGO Racers have to team up to stop him."),
+  ("assets/coast_guard.png", "A man has fallen into the river in LEGO City -- Hey! Save the citizens with the rescue copter and earn rewards in My Lego Network"),
+  ("assets/construction.png", "Join the LEGO City Construction crew! Drive, jump, and even fly as you race to build more of the city"),
+  ("assets/raanu.png", "Raanu and the Agori tribe of Vulcanus need your help! Meet other Bionicle characters and help bring peace to the tribes"),
+];
+
 class GalleryWidget extends StatefulWidget {
-  const GalleryWidget({super.key});
+  final List<GalleryImage> images;
+  final Size size;
+  const GalleryWidget({
+    required this.images,
+    required this.size,
+    super.key,
+  });
 
   @override
   GalleryPageState createState() => GalleryPageState();
 }
 
 class GalleryPageState extends State<GalleryWidget> {
-  final controller = CarouselController();
-  double get aspectRatio => 858 / 868;
-
-  List<(String, String)> get images => [
-    ("assets/rank1_page.png", "Public pages have modules other users can interact with. Here is a networker who can help guide you through Rank 1"),
-    ("assets/brickkeeper_page.png", "Characters from popular LEGO themes, like LEGO Universe, have their own pages and want to be your friend!"),
-    ("assets/private_page.png", "Your private page is your personal hub!"),
-    ("assets/mail_page.png", "Send mail to other players and networkers. Try sending some items to your friends, they'll appreciate it!"),
-    ("assets/inventory_page.png", "Collect blueprints around the network to make new items and rank up!"),
-    ("assets/page_builder.png", "Customize your page with all sorts of modules! Some yield items, others show off your creativity, and some do both!"),
-  ];
-
   int index = 0;
+  List<GalleryImage> get images => widget.images;
 
-  Duration get duration => Durations.medium1;
-  Curve get curve => Easing.standardAccelerate;
-
-  void update() {
-    setState(() { });
-    // controller.animateToItem(index, duration: duration, curve: curve);
-  }
+  void update() => setState(() { });
 
   void prev() {
     index--;
@@ -40,11 +47,6 @@ class GalleryPageState extends State<GalleryWidget> {
   void next() {
     index++;
     if (index == images.length) index = 0;
-    update();
-  }
-
-  void goTo(int value) {
-    setState(() => index = value);
     update();
   }
 
@@ -67,10 +69,7 @@ class GalleryPageState extends State<GalleryWidget> {
                 iconSize: 36,
               ),
               Flexible(
-                child: AspectRatio(
-                  aspectRatio: aspectRatio,
-                  child: HtmlImage(images[index].$1, size: Size(858, 868)),
-                ),
+                child: HtmlImage(images[index].$1, size: widget.size),
               ),
               IconButton(
                 onPressed: next,
@@ -82,9 +81,9 @@ class GalleryPageState extends State<GalleryWidget> {
         ),
         SizedBox(height: 8),
         Center(
-          child: FractionallySizedBox(
-            widthFactor: 0.6,
-            child: Text(images[index].$2, textAlign: TextAlign.center,),
+          child: SizedBox(
+            width: widget.size.width,
+            child: Text(images[index].$2, textAlign: TextAlign.center),
           ),
         ),
       ],

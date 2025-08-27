@@ -76,7 +76,10 @@ AppBar mlnAppBar({
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(12),
     ),
-    child: HtmlImage("assets/echo.png", size: Size(202, 202)),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: HtmlImage("assets/echo.png", size: Size(202, 202)),
+    ),
   ),
   actions: [
     if (!context.isMobile)

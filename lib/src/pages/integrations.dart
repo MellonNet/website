@@ -1,5 +1,5 @@
-import 'package:auto_scrolling/auto_scrolling.dart';
 import 'package:flutter/material.dart';
+import 'package:home_page/src/pages/scaffold.dart';
 import 'package:home_page/widgets.dart';
 
 class IntegrationsPage extends StatefulWidget {
@@ -13,37 +13,19 @@ class _IntegrationsPageState extends State<IntegrationsPage> {
   final controller = ScrollController();
 
   @override
-  Widget build(BuildContext context) => Title(
-    title: "Mini-Ranks | MellonNet!",
-    color: Colors.black,
-    child: Scaffold(
-      drawer: context.isMobile ? drawer(context) : null,
-      appBar: mlnAppBar(context: context, title: "Mini-Ranks"),
-      body: AutoScroll(
-        controller: controller,
-        anchorBuilder: (context) => SingleDirectionAnchor(),
-        cursorBuilder: (direction) => switch (direction) {
-          AutoScrollDirection.none => null,
-          _ => DirectionArrow(direction: direction),
-        },
-        child: ListView(
-          controller: controller,
-          cacheExtent: double.infinity,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(child: HtmlImage("assets/banner.webp", size: Size(922, 157))),
-                  ...topicList(context, integrations(context)),
-                ],
-              ),
-            ),
-              Footer(),
-          ],
+  Widget build(BuildContext context) => MlnScaffold(
+    title: "Mini-Ranks",
+    children: [
+      Center(
+        child: Text(
+          "Mini-Ranks and Badges",
+          style: context.textTheme.headlineLarge,
         ),
       ),
-    ),
+      SizedBox(height: 12),
+      GalleryWidget(images: minigameImages, size: Size(500, 400)),
+      SizedBox(height: 12),
+      ...topicList(context, integrations(context)),
+    ],
   );
 }

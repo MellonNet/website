@@ -1,10 +1,22 @@
 import 'package:flutter/widgets.dart';
 import 'package:home_page/widgets.dart';
 
+TopicLink networker(String name) =>
+  (name, "https://mln.mellonnet.com/mln/public_view/$name");
+
+List networkers(List<String> names) => [
+  for (final (index, name) in names.indexed) ...[
+    networker(name),
+    if (index == names.length - 1) ""
+    else if (index == names.length - 2) ", and "
+    else ", "
+  ],
+];
+
 List<Topic> integrations(BuildContext context) => [
   (
     "What are mini-ranks?",
-    "The normal progression of the game is to befriend new networkers, create new items, put up new modules, and evnetually, craft a masterpiece to get to the next rank. Each rank centers around a unique thene, but all the content (networkers, items, modules, etc) are custom made for My Lego Network. A mini-rank, on the other hand, uses an existing theme or brand, and requires some progression external to MLN. For example, the Bionicle mini-rank is themed around LEGO Bionicle products, and progression involves collecting items on the LEGO product pages. Some mini-ranks just give a badge and maybe some helpful items instead of a whole story",
+    "The normal progression of the game is to befriend new networkers, create new items, put up new modules, and eventually, craft a masterpiece to get to the next rank. Each rank centers around a unique theme, but all the content (networkers, items, modules, etc) are custom made for My Lego Network. A mini-rank, on the other hand, uses an existing theme or brand, and requires some progression external to MLN. For example, the Bionicle mini-rank is themed around LEGO Bionicle products, and progression involves collecting items on the LEGO product pages. Some mini-ranks just give a badge and maybe some helpful items instead of a whole story",
   ),
   (
     "Does MellonNet support mini-ranks?",
@@ -20,26 +32,43 @@ List<Topic> integrations(BuildContext context) => [
   ),
   (
     "Unsupported Minigames",
-    "The following minigames are not supported yet but may be supported one day. For now, send a winky message to their respective networkers:\n"
-      "- Dice Quest: Stanley Brick\n"
-      "- LEGO Universe: Professor Brickkeeper",
+    buildLink(context, [
+      "The following minigames are not supported yet but may be supported one day. For now, send a winky message to their respective networkers:\n",
+      "- Dice Quest: ",
+      networker("Stanley Brick"),
+      "\n"
+      "- LEGO Universe: ",
+      networker("Prof Brickkeeper"),
+    ]),
   ),
   (
     "LEGO Club",
-      "- LEGO Club Magazine: Required a paid subscription. Send a winky to Max instead\n"
-      "- Old Timer Badge: Required a (discontinued) LEGO Club Page. Send a winky to Dusty instead\n"
-      "- S.P.A: Required a Club Page and an MLN page. Send a winky to Patty Arch, Nora Stalgia, Zapp Chance, and Dusty\n"
-      "- Kanoka Club Badge: Required the Kanoka Club Award on your Club Page. Send a winky to Whenua",
+    buildLink(context, [
+      "- LEGO Club Magazine: Required a paid subscription. Send a winky to ", networker("Max"), " instead\n",
+      "- Old Timer Badge: Required a (discontinued) LEGO Club Page. Send a winky to ", networker("Dusty"), " instead\n",
+      "- S.P.A: Required a Club Page and an MLN page. Send a winky to ",
+      ...networkers(["Patty Arch", "Nora Stalgia", "Zapp Chance", "Dusty"]),
+      "\n",
+      "- Kanoka Club Badge: Required the Kanoka Club Award on your Club Page. Send a winky to ",
+      networker("Whenua"),
+    ]),
   ),
   (
     "Discontinued products",
-      "- Bionicle: Send a winky to Raanu, Tarix, and Berix\n"
-      "- Star Justice: Send a winky to Capt. Reynolds",
+      buildLink(context, [
+        "- Bionicle: Send a winky to ",
+        ...networkers(["Raanu", "Tarix", "Berix"]),
+        "\n"
+        "- Star Justice: Send a winky to ",
+        networker("Capt Reynolds"),
+      ])
   ),
   (
     "Beta programs",
-    "- MLN Beta: This badge is reserved for members of the community that helped play-test MellonNet\n"
-    "- LEGO Racers Beta: Send a winky to Pedalman Wheelie"
+    buildLink(context, [
+      "- MLN Beta: This badge is reserved for members of the community that helped play-test MellonNet\n"
+      "- LEGO Racers Beta: Send a winky to ", networker("Pedalman Wheelie"),
+    ]),
   ),
   (
     "Real-World Events",

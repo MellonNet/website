@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:auto_scrolling/auto_scrolling.dart';
 import 'package:home_page/widgets.dart';
+
+import "scaffold.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,54 +14,26 @@ class _HomePageState extends State<HomePage> {
   final controller = ScrollController();
 
   @override
-  Widget build(BuildContext context) => Title(
-    title: "Welcome to MellonNet!",
-    color: Colors.black,
-    child: Scaffold(
-      drawer: context.isMobile ? drawer(context) : null,
-      appBar: mlnAppBar(context: context, title: "MellonNet"),
-      body: AutoScroll(
-        controller: controller,
-        anchorBuilder: (context) => SingleDirectionAnchor(),
-        cursorBuilder: (direction) => switch (direction) {
-          AutoScrollDirection.none => null,
-          _ => DirectionArrow(direction: direction),
-        },
-        scrollTick: 5,
-        child: ListView(
-          controller: controller,
-          cacheExtent: double.infinity,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(child: HtmlImage("assets/banner.webp", size: Size(922, 157))),
-                  Center(
-                    child: Text(
-                      "Welcome to MellonNet!",
-                      style: context.textTheme.headlineLarge,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Center(
-                    child: Text(
-                      "The fan-made, unofficial revival of My Lego Network",
-                      style: context.textTheme.titleLarge
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  GalleryWidget(),
-                  SizedBox(height: 12),
-                  ...topicList(context, faq(context)),
-                ],
-              ),
-            ),
-            Footer(),
-          ],
+  Widget build(BuildContext context) => MlnScaffold(
+    title: "MellonNet",
+    children: [
+      Center(
+        child: Text(
+          "Welcome to MellonNet!",
+          style: context.textTheme.headlineLarge,
         ),
       ),
-    ),
+      SizedBox(height: 12),
+      Center(
+        child: Text(
+          "The fan-made, unofficial revival of My Lego Network",
+          style: context.textTheme.titleLarge
+        ),
+      ),
+      SizedBox(height: 12),
+      GalleryWidget(images: mlnImages, size: Size(858, 868)),
+      SizedBox(height: 12),
+      ...topicList(context, faq(context)),
+    ],
   );
 }
